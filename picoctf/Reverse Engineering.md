@@ -9,7 +9,9 @@ Upon using the CodeBrowser and decompiling the executable file, we can see the d
 
 <img width="1657" height="949" alt="image" src="https://github.com/user-attachments/assets/a920082e-e6c0-4295-a635-05c6d7083141" />
 
-Converting the hexadecimal we found to decimal, we get digits 549698, which gives us the flag.
+As the return value of the main function we find the, hexadecimal **0x86342**
+
+Converting the hexadecimal we found to decimal, we get digits **549698**, which gives us the flag.
 
 
 Since I didn't know what an EAX register is, I decided to search up about it and learnt that EAX is a 32 Bit accumalator and that it holds the values of arithmetic and logical operations. Return values are also stored in the EAX, which is the value we had to find in our case.
