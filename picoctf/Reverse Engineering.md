@@ -11,6 +11,9 @@ Upon using the CodeBrowser and decompiling the executable file, we can see the d
 
 Converting the hexadecimal we found to decimal, we get digits 549698, which gives us the flag.
 
+
+Since I didn't know what an EAX register is, I decided to search up about it and learnt that EAX is a 32 Bit accumalator and that it holds the values of arithmetic and logical operations. Return values are also stored in the EAX, which is the value we had to find in our case.
+
 ## Flag:
 
 ```
@@ -19,17 +22,16 @@ picoCTF{549698}
 
 ## Concepts learnt:
 
-- Include the new topics you've come across and explain them in brief
-- 
+- Learnt to use Ghidra to decompile code
+- Learnt what is EAX register  
 
 ## Notes:
 
-- Include any alternate tangents you went on while solving the challenge, including mistakes & other solutions you found.
-- 
+- NONE 
 
 ## Resources:
 
-- Include the resources you've referred to with links. [example hyperlink](https://google.com)
+- NONE
 
 
 ***
