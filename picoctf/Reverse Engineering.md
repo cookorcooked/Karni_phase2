@@ -37,3 +37,62 @@ picoCTF{549698}
 
 
 ***
+
+# 1. ARMssembly 1
+
+For what argument does this program print `win` with variables 81, 0 and 3? File: chall_1.S Flag format: picoCTF{XXXXXXXX} -> (hex, lowercase, no 0x, and 32 bits. ex. 5614267 would be picoCTF{0055aabb})
+
+## Solution:
+
+The file "chall_1.S" given to us contains Assembly code. Since I know nothing about assembly I watch a video about it to understand the way it works and basic commands that were used in the code.
+
+Understanding the function func:
+This function has a series of arithmetic operations, let us follow the commands step by step
+
+func:
+	sub	sp, sp, #32      // sp is a special register that acts as the stack pointer, this command allocated space on the stack for computation
+	str	w0, [sp, 12]     // Stores the value of w0 register in sp+12, which is a storage location on the stack, this can be x as we don't know it.
+	mov	w0, 81           // Stores 81 in w0
+	str	w0, [sp, 16]     // sp+16 = 81
+	str	wzr, [sp, 20]    // sp+20 = 0     since wzr is the zero register.
+	mov	w0, 3            // w0 = 3
+	str	w0, [sp, 24]     // sp+24 = 3
+	ldr	w0, [sp, 20]     // w0 = 0
+	ldr	w1, [sp, 16]     // w1 = 81
+	lsl	w0, w1, w0       // Performs logical shift left and stores it in w0, here, w0 = w1 << w0, which gives us w0 = 81 << 0 => w0 = 81
+	str	w0, [sp, 28]     // sp+28 = 81
+	ldr	w1, [sp, 28]     // w1 = 81
+	ldr	w0, [sp, 24]     // w0 = 3
+	sdiv	w0, w1, w0     // w0 = w1 / w0   => w0 = 81/3   => w0 = 27
+	str	w0, [sp, 28]     // sp+28 = 27
+	ldr	w1, [sp, 28]     // w1 = 27
+	ldr	w0, [sp, 12]     // w0 = x
+	sub	w0, w1, w0       // w0 = 27-x
+	str	w0, [sp, 28]     // sp+28 = 27-x
+	ldr	w0, [sp, 28]     // w0 = 27-x
+	add	sp, sp, 32       // Frees space on the stack
+	ret                  // Returns value in w0 ie. **27-x**
+
+
+## Flag:
+
+```
+picoCTF{0000001b}
+```
+
+## Concepts learnt:
+
+- Learnt The Basics Of Assembly
+
+## Notes:
+
+- NONE 
+
+## Resources:
+
+- [ Assembly Language Programming with ARM – Full Tutorial for Beginners ](https://youtu.be/gfmRrPjnEw4?si=HBN_2fgWqWfvQdHn)
+
+
+***
+
+
