@@ -49,7 +49,9 @@ The file "chall_1.S" given to us contains Assembly code. Since I know nothing ab
 Understanding the function func:
 This function has a series of arithmetic operations, let us follow the commands step by step
 
-func:
+
+_func:
+
 	sub	sp, sp, #32      // sp is a special register that acts as the stack pointer, this command allocated space on the stack for computation
 	str	w0, [sp, 12]     // Stores the value of w0 register in sp+12, which is a storage location on the stack, this can be x as we don't know it.
 	mov	w0, 81           // Stores 81 in w0
@@ -71,7 +73,8 @@ func:
 	str	w0, [sp, 28]     // sp+28 = 27-x
 	ldr	w0, [sp, 28]     // w0 = 27-x
 	add	sp, sp, 32       // Frees space on the stack
-	ret                  // Returns value in w0 ie. **27-x**
+	ret                  // Returns value in w0 ie. 27-x_
+
 
 
 ## Flag:
