@@ -50,31 +50,63 @@ Understanding the function func:
 This function has a series of arithmetic operations, let us follow the commands step by step
 
 
-_func:
+	main:
+		
+		stp	x29, x30, [sp, -48]!
+		add	x29, sp, 0
+		str	w0, [x29, 28]
+		str	x1, [x29, 16]
+		ldr	x0, [x29, 16]
+		add	x0, x0, 8
+		ldr	x0, [x0]
+		bl	atoi
+		str	w0, [x29, 44]
+		ldr	w0, [x29, 44]
+		// The code till here reads the input from the user as string, then uses the atoi fuunction to convert ascii to integer, then stores that value in w0, let this value be x.
+		
+		bl	func
+		//func is called
+	
+	_func:
+	
+		sub	sp, sp, #32      // sp is a special register that acts as the stack pointer, this command allocated space on the stack for computation
+		str	w0, [sp, 12]     // Stores the value of w0 register in sp+12, which gives us sp+12 = x
+		mov	w0, 81           // Stores 81 in w0
+		str	w0, [sp, 16]     // sp+16 = 81
+		str	wzr, [sp, 20]    // sp+20 = 0     since wzr is the zero register.
+		mov	w0, 3            // w0 = 3
+		str	w0, [sp, 24]     // sp+24 = 3
+		ldr	w0, [sp, 20]     // w0 = 0
+		ldr	w1, [sp, 16]     // w1 = 81
+		lsl	w0, w1, w0       // Performs logical shift left and stores it in w0, here, w0 = w1 << w0, which gives us w0 = 81 << 0 => w0 = 81
+		str	w0, [sp, 28]     // sp+28 = 81
+		ldr	w1, [sp, 28]     // w1 = 81
+		ldr	w0, [sp, 24]     // w0 = 3
+		sdiv	w0, w1, w0     // w0 = w1 / w0   => w0 = 81/3   => w0 = 27
+		str	w0, [sp, 28]     // sp+28 = 27
+		ldr	w1, [sp, 28]     // w1 = 27
+		ldr	w0, [sp, 12]     // w0 = x
+		sub	w0, w1, w0       // w0 = 27-x
+		str	w0, [sp, 28]     // sp+28 = 27-x
+		ldr	w0, [sp, 28]     // w0 = 27-x
+		add	sp, sp, 32       // Frees space on the stack
+		ret                  // Returns value in w0 ie. 27-x
 
-	sub	sp, sp, #32      // sp is a special register that acts as the stack pointer, this command allocated space on the stack for computation
-	str	w0, [sp, 12]     // Stores the value of w0 register in sp+12, which is a storage location on the stack, this can be x as we don't know it.
-	mov	w0, 81           // Stores 81 in w0
-	str	w0, [sp, 16]     // sp+16 = 81
-	str	wzr, [sp, 20]    // sp+20 = 0     since wzr is the zero register.
-	mov	w0, 3            // w0 = 3
-	str	w0, [sp, 24]     // sp+24 = 3
-	ldr	w0, [sp, 20]     // w0 = 0
-	ldr	w1, [sp, 16]     // w1 = 81
-	lsl	w0, w1, w0       // Performs logical shift left and stores it in w0, here, w0 = w1 << w0, which gives us w0 = 81 << 0 => w0 = 81
-	str	w0, [sp, 28]     // sp+28 = 81
-	ldr	w1, [sp, 28]     // w1 = 81
-	ldr	w0, [sp, 24]     // w0 = 3
-	sdiv	w0, w1, w0     // w0 = w1 / w0   => w0 = 81/3   => w0 = 27
-	str	w0, [sp, 28]     // sp+28 = 27
-	ldr	w1, [sp, 28]     // w1 = 27
-	ldr	w0, [sp, 12]     // w0 = x
-	sub	w0, w1, w0       // w0 = 27-x
-	str	w0, [sp, 28]     // sp+28 = 27-x
-	ldr	w0, [sp, 28]     // w0 = 27-x
-	add	sp, sp, 32       // Frees space on the stack
-	ret                  // Returns value in w0 ie. 27-x_
+	//The flow is returned to the main function
+		
+		cmp	w0, 0  			//compares w0 with 0 
+		bne	.L4				//bne is Branch if Not Equal, so the program displays "You Lose :(" if w0 is not equal to 0.
 
+		adrp	x0, .LC0	 
+		add	x0, x0, :lo12:.LC0
+		bl	puts
+		b	.L6
+	
+	//This block of code displays "You Win!" and skips the "You Lose :(" case and goes to the end
+
+After interpretting the code we can clearly see that we get the win condition if we input the number 27
+
+Converting the answer to hexadecimal and using the flagformat we get the flag.
 
 
 ## Flag:
