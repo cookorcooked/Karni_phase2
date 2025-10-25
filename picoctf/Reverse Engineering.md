@@ -38,7 +38,7 @@ picoCTF{549698}
 
 ***
 
-# 1. ARMssembly 1
+# 2. ARMssembly 1
 
 For what argument does this program print `win` with variables 81, 0 and 3? File: chall_1.S Flag format: picoCTF{XXXXXXXX} -> (hex, lowercase, no 0x, and 32 bits. ex. 5614267 would be picoCTF{0055aabb})
 
@@ -126,6 +126,87 @@ picoCTF{0000001b}
 ## Resources:
 
 - [ Assembly Language Programming with ARM – Full Tutorial for Beginners ](https://youtu.be/gfmRrPjnEw4?si=HBN_2fgWqWfvQdHn)
+
+
+***
+
+# 3. vault-door-3
+
+This vault uses for-loops and byte arrays. The source code for this vault is here: VaultDoor3.java
+
+## Solution:
+
+We have been given a file "VaultDoor3.java", which is a java file, let us take a look at the code
+	
+	import java.util.*;
+	
+	class VaultDoor3 {
+	    public static void main(String args[]) {
+	        VaultDoor3 vaultDoor = new VaultDoor3();
+	        Scanner scanner = new Scanner(System.in);
+	        System.out.print("Enter vault password: ");
+	        String userInput = scanner.next();
+		String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+		if (vaultDoor.checkPassword(input)) {
+		    System.out.println("Access granted.");
+		} else {
+		    System.out.println("Access denied!");
+	        }
+	    }
+
+This block of code takes the input flag and from the string for example "picoCTF{example_password}" it takes the substring "example_password", the password is then checked using the checkPassword function.
+
+	    public boolean checkPassword(String password) {
+	        if (password.length() != 32) {
+	            return false;
+	        }
+	        char[] buffer = new char[32];
+	        int i;
+	        for (i=0; i<8; i++) {
+	            buffer[i] = password.charAt(i);
+	        }
+	        for (; i<16; i++) {
+	            buffer[i] = password.charAt(23-i);
+	        }
+	        for (; i<32; i+=2) {
+	            buffer[i] = password.charAt(46-i);
+	        }
+	        for (i=31; i>=17; i-=2) {
+	            buffer[i] = password.charAt(i);
+	        }
+	        String s = new String(buffer);
+	        return s.equals("jU5t_a_sna_3lpm18gb41_u_4_mfr340");
+	    }
+	}
+
+This block of code first checks if the string lenght is 32, if yes then it continues to use 4 loops to store a jumbled version of the password in buffer[]. This buffer is then checked with "jU5t_a_sna_3lpm18gb41_u_4_mfr340" if it matches it gives True and the program would return "Access granted."
+
+LOOP 1 : For indices i=0 to 1=7, buffer[i] = password.charAt(i), so those indices remain the same
+LOOP 2 : For indices i=8 to 1=15, buffer[i] = password.charAt(23-i), so those indices remain the same
+LOOP 3 : For indices i=16 to 1=30, for every other index, buffer[i] = password.charAt(46-i), so those indices remain the same
+LOOP 4 : For indices i=17 to 1=31, for every other index, buffer[i] = password.charAt(i), so those indices remain the same
+
+Reversing the string "jU5t_a_sna_3lpm18gb41_u_4_mfr340" using the same computation would give us the password to enter.
+
+
+## Flag:
+
+```
+picoCTF{549698}
+```
+
+## Concepts learnt:
+
+- Learnt to use Ghidra to decompile code
+- Learnt what is EAX register  
+
+## Notes:
+
+- NONE 
+
+## Resources:
+
+- NONE
 
 
 ***
