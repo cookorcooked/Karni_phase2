@@ -201,8 +201,7 @@ picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_1fb380}
 
 ## Concepts learnt:
 
-- Learnt to use Ghidra to decompile code
-- Learnt what is EAX register  
+- Learnt about working of loops in Java
 
 ## Notes:
 
