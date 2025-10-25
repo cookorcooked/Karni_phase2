@@ -188,11 +188,15 @@ LOOP 4 : For indices i=17 to 1=31, for every other index, buffer[i] = password.c
 
 Reversing the string "jU5t_a_sna_3lpm18gb41_u_4_mfr340" using the same computation would give us the password to enter.
 
+![Final password](https://github.com/user-attachments/assets/e7d132bc-43a2-44b3-956a-b8a4c4e3763b)
+
+Wrapping the string "jU5t_a_s1mpl3_an4gr4m_4_u_1fb380" with the flag format gives us the flag.  
+
 
 ## Flag:
 
 ```
-picoCTF{549698}
+picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_1fb380}
 ```
 
 ## Concepts learnt:
