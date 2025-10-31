@@ -1,4 +1,4 @@
-# 3. RSA Oracle
+# 1. RSA Oracle
 
 Can you abuse the oracle? An attacker was able to intercept communications between a bank and a fintech company. They managed to get the message (ciphertext) and the password that was used to encrypt the message.
 
@@ -63,4 +63,64 @@ picoCTF{su((3ss_(r@ck1ng_r3@_60f50766}
 - NONE
 
 ***
+
+# 2. Custom Encryption
+
+Can you get sense of this code file and write the function that will decode the given encrypted file content. Find the encrypted file here flag_info and code file might be good to analyze and get the flag.
+
+## Solution:
+
+Reading the script we can understand how it works to get the flag, first we need to calculate the shared-key, then get the semi-cipher which is basically the plaintext reversed which is then XORed with the key "trudeau". And then get the fincal cipher which is the ASCII values of semicipher which is multiplied by shared-key *311. 
+Making a script for this, we get the flag.
+
+    p = 97
+    q = 31
+    a = 89
+    b = 27
+    key = "trudeau"
+    
+    cipher_list = [33588, 276168, 261240, 302292, 343344, 328416, 242580, 85836, 82104, 156744, 0, 309756, 78372, 18660, 253776, 0, 82104, 320952, 3732, 231384, 89568, 100764, 22392, 22392, 63444, 22392, 97032, 190332, 119424, 182868, 97032, 26124, 44784, 63444]
+    
+    shared_key = pow(q, a * b, p)
+    
+    divisor = shared_key * 311
+    semi_cipher = ""
+    for c_val in cipher_list:
+        ascii_val = c_val // divisor
+        semi_cipher += chr(ascii_val)
+    
+    key_lenqth = len(key)
+    p_rev = ""
+    for i, char in enumerate(semi_cipher):
+        key_char = key[i % key_lenqth]
+        decrypted_char = chr(ord(char) ^ ord(key_char))
+        p_rev += decrypted_char
+    
+    flag = p_rev[::-1]
+    print(f"final flag: {flag}")
+
+Running this script we get, 
+
+    cookorcooked@ubuntu25:~/Desktop/CTF$ python3 custom.py
+    final flag: picoCTF{custom_d2cr0pt6d_dc499538}
+
+
+    
+## Flag:
+
+```
+picoCTF{custom_d2cr0pt6d_dc499538}
+```
+
+## Concepts learnt:
+
+- Learnt how to analyze an encryption script and reverse it.
+
+## Notes:
+
+- NONE
+
+## Resources:
+
+- NONE
 
