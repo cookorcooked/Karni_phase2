@@ -16,7 +16,9 @@ The program.deb file is an installation file for steghide, so we know we need to
 Running steghide with the key as "DUEDILIGENCE" on the pictures gives us the flag with picture3.bmp
 (Since I was on Windows as I couldn't get the right version of Wireshark on linux. I used an online Steganographic Decoder which does the same thing as steghide.)
 
+
 <img width="1916" height="899" alt="image" src="https://github.com/user-attachments/assets/48ee6f81-3d93-405d-97ce-263de3810df8" />
+
 
 
 <img width="1369" height="182" alt="image" src="https://github.com/user-attachments/assets/bd50ce9b-0d95-43f4-b1ec-9f1908a0d820" />
