@@ -70,7 +70,7 @@ Can you get sense of this code file and write the function that will decode the 
 
 ## Solution:
 
-Reading the script we can understand how it works to get the flag, first we need to calculate the shared-key, then get the semi-cipher which is basically the plaintext reversed which is then XORed with the key "trudeau". And then get the fincal cipher which is the ASCII values of semicipher which is multiplied by shared-key *311. 
+Reading the script we can understand how it works to get the flag, first we need to calculate the shared-key, then get the semi-cipher which is basically the plaintext reversed which is then XORed with the key "trudeau". And then get the fincal cipher which is the ASCII values of semicipher which is multiplied by shared-key*311. 
 Making a script for this, we get the flag.
 
     p = 97
