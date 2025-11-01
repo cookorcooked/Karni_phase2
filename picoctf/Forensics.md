@@ -47,6 +47,47 @@ picoCTF{h1dd3n_1n_pLa1n_51GHT_18375919}
 
 ***
 
+# 2. tunn3l v1s10n
+
+We found this file. Recover the flag.
+
+## Solution:
+
+Opening the file in an hex editor like HxD, directly gives us the hint that it is a bitmap file due to the start with BM. I add the .bmp extension but the file still doesn't work.
+
+<img width="822" height="186" alt="image" src="https://github.com/user-attachments/assets/6217e754-1123-4355-b84f-1f181ec53c56" />
+
+I opened a random reference bitmap file and changed our files header to match the reference.
+Now the image could be opened and I got this.
+
+<img width="1527" height="430" alt="image" src="https://github.com/user-attachments/assets/2527f535-05b0-4052-8e90-52f2c96518da" />
+
+The hint lets us know that there is still something we can do to make the image look right. I googled how to change the height and width and found what offset value to change to change the height of the image. I then performed trial and error, sometimes the height became out of bounds that made the file not open, but after meddling with it for a bit, I got an image in which the flag was shown.
+
+<img width="1146" height="837" alt="image" src="https://github.com/user-attachments/assets/6b26d092-2104-434b-b681-d08eaef8afb0" />
+
+
+
+## Flag:
+
+```
+picoCTF{qu1t3_a_v13w_2020}
+```
+
+## Concepts learnt:
+
+- Learnt about how to read and edit hex code of a file and how it controls the parameters of an image such as height. 
+
+## Notes:
+
+- I had first tried looking up what the header of a bitmap was supposed to look like but that turned out to be more complicated due to the language used, the reference method turned out to be much better for me.
+
+## Resources:
+
+- NONE
+
+***
+
 
 # 3. m00nwalk
 
