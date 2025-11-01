@@ -1,3 +1,42 @@
+# 1. IQ Test
+
+let your input x = 30478191278.
+
+wrap your answer with nite{ } for the flag.
+
+As an example, entering x = 34359738368 gives (y0, ..., y11), so the flag would be nite{010000000011}.
+
+## Solution:
+
+Since logic gates take only 0s and 1s as their input, I converted our input to binary, `11100011000101001000100101010101110`, this is only 35 bits we add a zero to the start and get `011100011000101001000100101010101110` without changing our original number.
+
+I now used an online logic gate solver and painstakingly made the entire setup in it, adding each logic gate one by one, I then put the inputs into the logic gates serially.
+
+This finally gave me the outputs which I then wraped as told in the description to get the flag.
+
+
+
+## Flag:
+
+```
+nite{100010011000}
+```
+
+## Concepts learnt:
+
+- Learnt about different kinds of logic gates and how to compute them.
+  
+## Notes:
+
+- Doing the solution by hand on paper would have probably taken lesser time than making the setup online.
+
+## Resources:
+
+- [Online Logic Gate Solver](https://logic.ly/demo/)
+
+***
+
+
 # 2. I like Logic
 
 i like logic and i like files, apparently, they have something in common, what should my next step be.
